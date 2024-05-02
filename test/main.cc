@@ -3,11 +3,11 @@
 
 int main()
 {
-        // Create and ppulate a histogram which has bins of size 2
+        // Create and populate a histogram which has bins of size 2
         balancing_histogram::hist<float, 2> h;
-        for(int i = 0; i < 10; i++) h.insert(float(i));
-        h.insert(100);
-        for(int i = 5; i < 10; i++) h.insert(float(i));
+        for(float i = 0.0f; i < 10.0f; i++) h.insert(i);
+        h.insert(100.0f);
+        for(float i = 5.0f; i < 10.0f; i++) h.insert(i);
 
         // Print the histogram
         h.print();

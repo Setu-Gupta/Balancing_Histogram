@@ -8,9 +8,12 @@
 #include <utility>
 #include <vector>
 
+template<typename T>
+concept UsableType = std::numeric_limits<T>::is_specialized;
+
 namespace balancing_histogram
 {
-        template<typename T, std::size_t N>
+        template<UsableType T, std::size_t N>
         class hist
         {
                 private:
