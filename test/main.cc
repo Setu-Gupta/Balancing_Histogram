@@ -10,7 +10,7 @@ int main()
         h.insert(100);
         for(int i = 5; i < 10; i++) h.insert(float(i));
 
-        // // Print the histogram
+        // Print the histogram
         h.print();
 
         // Print out the learned cuts
