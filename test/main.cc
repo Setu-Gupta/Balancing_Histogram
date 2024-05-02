@@ -1,6 +1,5 @@
 #include <balancing_hist.h>
 #include <iostream>
-#include <limits>
 
 int main()
 {
