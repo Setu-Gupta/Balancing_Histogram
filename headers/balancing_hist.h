@@ -130,7 +130,6 @@ namespace balancing_histogram
                                 if(node->leaf)
                                 {
                                         cuts.push_back(node->min_elem);
-                                        cuts.push_back(node->max_elem);
                                         return cuts;
                                 }
 
@@ -139,7 +138,6 @@ namespace balancing_histogram
                                 std::vector<T> right_cuts = this->__inorder_traversal_cuts(node->right);
 
                                 cuts = left_cuts;
-                                right_cuts.erase(right_cuts.begin());                          // Remove the repeated entry
                                 cuts.insert(cuts.end(), right_cuts.begin(), right_cuts.end()); // Append the right cuts
                                 return cuts;
                         }
