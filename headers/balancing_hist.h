@@ -9,7 +9,11 @@
 #include <vector>
 
 template<typename T>
-concept UsableType = std::numeric_limits<T>::is_specialized;
+concept UsableType = requires(T v)
+{
+        std::numeric_limits<T>::is_specialized;
+        {v/2} -> std::same_as<T>;
+};
 
 namespace balancing_histogram
 {
