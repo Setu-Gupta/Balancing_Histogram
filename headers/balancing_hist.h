@@ -12,7 +12,7 @@ template<typename T>
 concept UsableType = requires(T v)
 {
         std::numeric_limits<T>::is_specialized;
-        {v/2} -> std::same_as<T>;
+        {v / 2} -> std::same_as<T>;
 };
 
 namespace balancing_histogram
@@ -77,13 +77,13 @@ namespace balancing_histogram
 
                         std::unique_ptr<histogram_bin> root;
 
-                        void __insert(std::unique_ptr<histogram_bin>& node, T elem)
+                        void __insert(std::unique_ptr<histogram_bin>& node, T elem, std::size_t count = 1)
                         {
                                 // Allocate a node if one does not exist yet
                                 if(!node)
                                 {
                                         node = std::make_unique<typename balancing_histogram::hist<T, N>::histogram_bin>();
-                                        node->increment(elem);
+                                        node->increment(elem, count);
                                 }
                                 else
                                 {
@@ -91,14 +91,14 @@ namespace balancing_histogram
                                         if(!node->leaf)
                                         {
                                                 if(elem <= node->mid_elem)
-                                                        this->__insert(node->left, elem);
+                                                        this->__insert(node->left, elem, count);
                                                 else
-                                                        this->__insert(node->right, elem);
+                                                        this->__insert(node->right, elem, count);
                                                 return;
                                         }
 
                                         // Step 2: Insert the element
-                                        std::size_t size = node->increment(elem);
+                                        std::size_t size = node->increment(elem, count);
 
                                         // Step 3: Check if we have exceeded the maximum node size N. If yes, split it
                                         if(size > N && node->num_elems() > 1) //  We exceed the size only if the total count exceeds N and there are more than 1 bins
@@ -168,6 +168,11 @@ namespace balancing_histogram
                         }
 
                 public:
+                        void increment(T elem, std::size_t count)
+                        {
+                                this->__insert(this->root, elem, count);
+                        }
+
                         void insert(T elem)
                         {
                                 this->__insert(this->root, elem);

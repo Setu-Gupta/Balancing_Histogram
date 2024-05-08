@@ -6,7 +6,9 @@ The histogram class, i.e. `balancing_histogram::hist<T, N>`, builds a balanced h
 
 The histogram class supports the following methods:
   1. `void insert(T elem)`: Inserts an element of type `T` in the histogram
-
-  2. `std::vector<T> get_bin_boundaries()`: Returns the boundries of the bins. This vector contains the smallest values in each of the bins sorted from lowest to highest
   
-  3. `void print()`: Prints the histogram on `stdout` 
+  2. `void increment(T elem, std::size_t count)`: Increments the count for `elem` of type `T` by `count`
+
+  3. `std::vector<T> get_bin_boundaries()`: Returns the boundries of the bins. This vector contains the smallest values in each of the bins sorted from lowest to highest
+  
+  4. `void print()`: Prints the histogram on `stdout` 
